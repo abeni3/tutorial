@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase, onValue, ref, set } from 'firebase/database';
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 
 
 const firebaseConfig = {
@@ -42,3 +42,7 @@ export const useData = (path, transform) => {
   
     return [data, loading, error];
   };
+
+  export const setData = (path, value) => (
+    set(ref(database, path), value)
+  );
