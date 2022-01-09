@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import CourseList  from './components/CourseList';
+import { useData } from './utilities/firebase.js';
 
 const App = () =>  {
-
+/*  Loading JSON from a url
   const [schedule, setSchedule] = useState();
   const url = 'https://courses.cs.northwestern.edu/394/data/cs-courses.php';
 
@@ -16,8 +17,13 @@ const App = () =>  {
     }
     fetchSchedule();
   }, []);
-
+  
   if(!schedule) return <h1>Loading Schedule</h1>
+*/
+  const [schedule, loading, error] = useData('/', addScheduleTimes); 
+  
+  if (error) return <h1>{error}</h1>;
+  if (loading) return <h1>Loading the schedule...</h1>
 
   return (
   <div className="container">
