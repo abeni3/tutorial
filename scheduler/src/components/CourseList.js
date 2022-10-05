@@ -8,6 +8,7 @@ const CourseList = ({ courses }) => {
     const [term, setTerm] = useState('Fall');
     const [selected, setSelected] = useState([]);
   
+    //returns array of enumerable properties of an object
     const termCourses = Object.values(courses).filter(course => term === getCourseTerm(course));
   
     return (
@@ -38,7 +39,7 @@ const CourseList = ({ courses }) => {
 
 
 const TermSelector = ({term, setTerm}) => {
-  const [user] = useUserState();
+  const user = useUserState();
   return (
     <div className="btn-toolbar justify-content-between">
       <div className="btn-group">

@@ -1,6 +1,8 @@
+//if atlease 1 course in the selected conflicts with the course. returns true/false.
 export const hasConflict = (course, selected) => (
     selected.some(selection => courseConflict(course, selection))
   );
+
 
 const courseConflict = (course1, course2) => (
     getCourseTerm(course1) === getCourseTerm(course2)
