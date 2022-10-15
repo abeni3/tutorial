@@ -3,6 +3,10 @@ import './App.css'
 import CourseList from './components/CourseList'
 import { useData } from './utilities/firebase.js'
 import { timeParts } from './utilities/times'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import CForm from './components/CForm'
+
+// import UserEditor from './components/UserEditor'
 
 const App = () => {
   /*  Loading JSON from a url
@@ -26,20 +30,31 @@ const App = () => {
   if (error) return <h1>{error}</h1>
   if (loading) return <h1>Loading the schedule...</h1>
 
+  const Home = () => {
+    return (
+      <div className="container">
+        <Banner title={schedule.title} />
+        <CourseList courses={schedule.courses} />
+      </div>
+    )
+  }
+
   return (
-    <div className="container">
-      <Banner title={schedule.title} />
-      <CourseList courses={schedule.courses} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home></Home>} />
+        <Route path="/cform" element={<CForm />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
 const Banner = ({ title }) => <h1>{title}</h1>
 
 const mapValues = (fn, obj) =>
-//returns object created from key/value entries. accepts iterable object
+  //returns object created from key/value entries. accepts iterable object
   Object.fromEntries(
-    Object.entries(obj).map(([key, value]) => [key, fn(value)]),//returns array of key/value enumerable properties of an object
+    Object.entries(obj).map(([key, value]) => [key, fn(value)]), //returns array of key/value enumerable properties of an object
   )
 
 const addCourseTimes = (course) => ({

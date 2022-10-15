@@ -2,6 +2,8 @@ import React from 'react'
 import { setData, useUserState } from '../utilities/firebase.js'
 import { timeParts } from '../utilities/times.js'
 
+import { Link, NavLink } from 'react-router-dom'
+
 import {
   hasConflict,
   getCourseNumber,
@@ -54,6 +56,9 @@ const Course = ({ course, selected, setSelected }) => {
         </div>
         <div className="card-text">{course.title}</div>
         <div className="card-text">{course.meets}</div>
+        <Link to={{pathname:"/cform", state:{fromDashboard: true }}}>
+          Edit Course Info
+        </Link>
       </div>
     </div>
   )

@@ -1,5 +1,4 @@
 import React from 'react'
-import Course from './Course'
 import './Modal.css'
 
 // https://codebuckets.com/2021/08/08/bootstrap-modal-dialog-in-react-without-jquery/
