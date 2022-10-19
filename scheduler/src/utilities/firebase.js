@@ -43,7 +43,7 @@ export const useData = (path, transform) => {
       (snapshot) => {
         const val = snapshot.val()
         if (devMode) {
-          console.log(val)
+          // console.log(val)
         }
         setData(transform ? transform(val) : val)
         setLoading(false)

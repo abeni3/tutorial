@@ -1,6 +1,7 @@
 import React from 'react'
 import { setData, useUserState } from '../utilities/firebase.js'
 import { timeParts } from '../utilities/times.js'
+import { useNavigate } from 'react-router-dom'
 
 import { Link, NavLink } from 'react-router-dom'
 
@@ -10,23 +11,7 @@ import {
   getCourseTerm,
 } from '../utilities/times.js'
 
-const getCourseMeetingData = (course) => {
-  const meets = prompt('Enter meeting data: MTuWThF hh:mm-hh:mm', course.meets)
-  const valid = !meets || timeParts(meets).days
-  if (valid) return meets
-  alert('Invalid meeting data')
-  return null
-}
 
-const reschedule = async (course, meets) => {
-  if (meets && window.confirm(`Change ${course.id} to ${meets}?`)) {
-    try {
-      await setData(`courses/${course.id}/meets/`, meets)
-    } catch (error) {
-      alert(error)
-    }
-  }
-}
 
 const Course = ({ course, selected, setSelected }) => {
   const isSelected = selected.includes(course)
@@ -39,6 +24,7 @@ const Course = ({ course, selected, setSelected }) => {
       ? 'lightgreen'
       : 'white',
   }
+  const navigate = useNavigate()
 
   return (
     <div
@@ -46,9 +32,9 @@ const Course = ({ course, selected, setSelected }) => {
       // style={{background: "red"}}
       style={style}
       onClick={isDisabled ? null : () => setSelected(toggle(course, selected))}
-      onDoubleClick={
-        !user ? null : () => reschedule(course, getCourseMeetingData(course))
-      }
+      // onDoubleClick={
+      //   !user ? null : () => reschedule(course, getCourseMeetingData(course))
+      // }
     >
       <div className="card-body">
         <div className="card-title">
@@ -56,7 +42,7 @@ const Course = ({ course, selected, setSelected }) => {
         </div>
         <div className="card-text">{course.title}</div>
         <div className="card-text">{course.meets}</div>
-        <Link to={{pathname:"/cform", state:{fromDashboard: true }}}>
+        <Link to="/cform" state={course}>
           Edit Course Info
         </Link>
       </div>
