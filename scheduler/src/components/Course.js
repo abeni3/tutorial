@@ -11,8 +11,6 @@ import {
   getCourseTerm,
 } from '../utilities/times.js'
 
-
-
 const Course = ({ course, selected, setSelected }) => {
   const isSelected = selected.includes(course)
   const isDisabled = !isSelected && hasConflict(course, selected)
@@ -42,9 +40,11 @@ const Course = ({ course, selected, setSelected }) => {
         </div>
         <div className="card-text">{course.title}</div>
         <div className="card-text">{course.meets}</div>
-        <Link to="/cform" state={course}>
-          Edit Course Info
-        </Link>
+        {!user ? null : (
+          <Link to="/cform" state={course}>
+            Edit Course Info
+          </Link>
+        )}
       </div>
     </div>
   )
