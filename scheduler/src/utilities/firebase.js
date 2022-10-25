@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getDatabase, onValue, ref, set } from 'firebase/database'
+import { getDatabase, onValue, ref, set, get } from 'firebase/database'
 import {
   getAuth,
   GoogleAuthProvider,
@@ -60,6 +60,12 @@ export const useData = (path, transform) => {
   return [data, loading, error]
 }
 
+export const useRef = (path) =>{
+  const val = get(ref(database, path));
+  console.log(val.val());
+}
+
+
 export const setData = (path, value) => set(ref(database, path), value)
 
 export const useUserState = () => {
@@ -68,9 +74,6 @@ export const useUserState = () => {
   useEffect(() => {
     onIdTokenChanged(getAuth(firebase), setUser) //observed changes in signed in user token id
   }, [])
-  // if(user){
-  //   console.log(user.metadata)
-  // }
 
   return user
 }

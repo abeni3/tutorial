@@ -83,7 +83,10 @@ const CForm = ({}) => {
           type="button"
           id="submit_btn"
           className="btn btn-outline-dark me-2"
-          onClick={() => reschedule(course, getCourseMeetingData(course))}
+          onClick={() => {
+            reschedule(course, getCourseMeetingData(course))
+            navigate(-1)
+          }}
         >
           Submit
         </button>

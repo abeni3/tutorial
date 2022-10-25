@@ -4,6 +4,7 @@ import {
   signInWithGoogle,
   signOut,
   useUserState,
+  useData
 } from '../utilities/firebase.js'
 
 import Course from './Course'
@@ -64,6 +65,7 @@ const SignOutButton = () => (
 
 const TermSelector = ({ term, setTerm }) => {
   const user = useUserState()
+
   return (
     <div className="btn-toolbar justify-content-between">
       <div className="btn-group">

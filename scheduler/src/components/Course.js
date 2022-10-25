@@ -1,9 +1,10 @@
 import React from 'react'
-import { setData, useUserState } from '../utilities/firebase.js'
+import { setData, useRef, useUserState } from '../utilities/firebase.js'
 import { timeParts } from '../utilities/times.js'
 import { useNavigate } from 'react-router-dom'
-
+import { useData } from '../utilities/firebase.js'
 import { Link, NavLink } from 'react-router-dom'
+import { useProfile } from '../utilities/profile.js'
 
 import {
   hasConflict,
@@ -15,6 +16,20 @@ const Course = ({ course, selected, setSelected }) => {
   const isSelected = selected.includes(course)
   const isDisabled = !isSelected && hasConflict(course, selected)
   const user = useUserState()
+  const marr = { user_id: null }
+  if (user) {
+    marr['user_id'] = user.uid
+  }
+
+
+  // const userStat = useProfile(marr['user_id'])
+  // console.log("is admin from course " + !userStat)
+
+
+  const [isAdmin, l, e] = useData(`/admins/${marr['user_id']}`)
+
+  // console.log('isAdmin --> ' + isAdmin)
+
   const style = {
     backgroundColor: isDisabled
       ? 'lightgrey'
@@ -22,7 +37,7 @@ const Course = ({ course, selected, setSelected }) => {
       ? 'lightgreen'
       : 'white',
   }
-  const navigate = useNavigate()
+  const user_status = user && isAdmin;
 
   return (
     <div
@@ -40,7 +55,7 @@ const Course = ({ course, selected, setSelected }) => {
         </div>
         <div className="card-text">{course.title}</div>
         <div className="card-text">{course.meets}</div>
-        {!user ? null : (
+        {!user_status ? null : (
           <Link to="/cform" state={course}>
             Edit Course Info
           </Link>
