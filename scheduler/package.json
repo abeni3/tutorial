@@ -25,11 +25,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "em:cy:open": "start-server-and-test em:exec http://127.0.0.1:3000 cy:open",
+    "cy:open": "cypress open",
     "em:start": "firebase emulators:start --import=./saved-data --export-on-exit",
     "em:exec": "firebase emulators:exec --import=./saved-data 'npm start'",
     "em:execui": "firebase emulators:exec --ui --import=./saved-data 'npm start'",
-    "cy:open": "cypress open --e2e",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

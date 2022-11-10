@@ -1,11 +1,7 @@
 {
   "hosting": {
     "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -24,6 +20,10 @@
     },
     "ui": {
       "enabled": true
+    },
+    "hosting": {
+      "host": "127.0.0.1",
+      "port": 9010
     }
   }
 }
