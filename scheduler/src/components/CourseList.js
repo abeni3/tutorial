@@ -93,7 +93,7 @@ const TermButton = ({ term, setTerm, checked }) => (
       autoComplete="off"
       checked={checked}
     />
-    <label className="btn btn-success m-1 p-2" htmlFor={term}>
+    <label className="btn btn-success m-1 p-2" htmlFor={term} data-cy={term}>
       {term}
     </label>
   </>

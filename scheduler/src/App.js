@@ -5,7 +5,6 @@ import { useData } from './utilities/firebase.js'
 import { timeParts } from './utilities/times'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CForm from './components/CForm'
-
 // import UserEditor from './components/UserEditor'
 
 const App = () => {

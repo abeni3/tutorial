@@ -3,7 +3,7 @@ import { setData, useRef, useUserState } from '../utilities/firebase.js'
 import { timeParts } from '../utilities/times.js'
 import { useNavigate } from 'react-router-dom'
 import { useData } from '../utilities/firebase.js'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useProfile } from '../utilities/profile.js'
 
 import {
@@ -42,6 +42,8 @@ const Course = ({ course, selected, setSelected }) => {
   return (
     <div
       className="card m-1 p-2"
+      data-cy="course"
+
       // style={{background: "red"}}
       style={style}
       onClick={isDisabled ? null : () => setSelected(toggle(course, selected))}
