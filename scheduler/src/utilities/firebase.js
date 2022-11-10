@@ -8,6 +8,9 @@ import {
   signOut,
 } from 'firebase/auth'
 
+import { connectAuthEmulator, signInWithCredential } from "firebase/auth";
+import {  connectDatabaseEmulator } from "firebase/database";
+
 import { useState, useEffect } from 'react'
 
 const firebaseConfig = {
@@ -24,6 +27,18 @@ const firebaseConfig = {
 
 const firebase = initializeApp(firebaseConfig) //initialize a firebase app with some config
 const database = getDatabase(firebase) //get DB instance
+
+const auth = getAuth(firebase);
+
+if (process.env.REACT_APP_EMULATE) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectDatabaseEmulator(database, "127.0.0.1", 9000);
+
+  signInWithCredential(auth, GoogleAuthProvider.credential(
+    '{"sub": "qEvli4msW0eDz5mSVO6j3W7i8w1k", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
+  ));
+}
+
 
 export const useData = (path, transform) => {
   const [data, setData] = useState()
